@@ -4,7 +4,7 @@
 # Open AI Gym
 ### CartPole 예제로 알아보기
 
----
+
 
 # The CartPole session
 ### environment 생성
@@ -20,7 +20,7 @@ obs = e.reset()
 `reset()` 의 return 값은 첫번째 observation 이다. 
 - numpy.ndarray 형태로 반환된다. 
 
----
+
 
 # The CartPole session
 ### observation space, action space 확인
@@ -33,7 +33,7 @@ e.observation_space
 `observation_space` 는 Box(4, )이다.
 (각각 막대 무게중심의 x 좌표, 속도, 바닥과의 각도, 각속도)
 
----
+
 
 
 # The CartPole session
@@ -49,7 +49,7 @@ e.step(e.action_space.sample())
 random action을 취함. 
 - `step()`은 다음 observation, reward, episode 가 끝났는지에 대한 flag, 기타 정보를 파이썬 튜플 형태로 반환한다. 
 
----
+
 
 ### sample code
 
@@ -75,7 +75,7 @@ if __name__ == "__main__":
 
 ```
 
----
+
 
 ### 실행결과
 
@@ -87,14 +87,14 @@ Episode done in 14 steps, total reward 14.00
 - reward boundary : 문제 해결을 위해서 agent 가 받아야하는 reward (100 episodes 의 평균치)
 - 이 문제는 reward boundary 가 195인데 위의 코드는 14가 나왔으므로 poor performance 임을 알 수 있다. 
 
----
+
 
 # Wrappers 
 - ObservationWrapper
 - RewardWrapper
 - ActionWrapper
 
----
+
 
 # Wrappers
 ### wrapper class 정의
@@ -108,7 +108,7 @@ class RandomActionWrapper(gym.ActionWrapper):
 - `__init__()`을 상속받아 재정의한다. 
 - epsilon 은  random action 발생 확률
 
----
+
 # Wrappers
 ### action 함수 정의
 
@@ -124,7 +124,7 @@ class RandomActionWrapper(gym.ActionWrapper):
 - `action_space.sample()`을  사용하여 epsilon  확률만큼 random action 수행.
 - 나머지 경우는 입력받은 action 수행.
 
----
+
 
 ### main 함수
 ```python
@@ -142,7 +142,7 @@ if __name__ == "__main__":
 	print("Reward got: %.2f" % total_reward)
 ```
 
---- 
+ 
 ### 실행 결과
 
 ```bash
@@ -153,6 +153,6 @@ Random!
 Reward got: 9.00
 ```
 
---- 
+ 
 # Monitor
 - episode 기록해서 저장할 수 있게 하는 wrapper class. 

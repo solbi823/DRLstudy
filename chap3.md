@@ -4,7 +4,7 @@
 # Deep Learning with PyTorch
 ### 한양대학교 최솔비
 
----
+
 
 # Tensor 만들기
 1. `torch.FloatTensor(3,2)`
@@ -15,7 +15,7 @@
 - tensor 의 data type 은 float를 주로 사용한다.
 - 32나 16비트로도 충분한 경우가 대부분이기 때문에 numpy array 를 인자로 tensor 생성할 때에는 type 을 `float32` 등으로 지정한다. (default 는 `float64`)
 
----
+
 
 # Scalar tensors
 
@@ -33,21 +33,21 @@ tensor(1)
 ```
 - scalar 값에 접근하기 위해서는 `item()`을 이용해야 함.
 
----
+
 
 # Tensor operations
 
 - inplace operation: `a.zero_()`와 같이 underscore 가 붙은 메서드는  tensor 객체의 내용을 바꾸는 연산을 한다. 
 - functional operation: `a.zero()`와 같은 메서드는 tensor 를 copy 하여 연산한다. original tensor는 수정되지 않는다. 
 
----
+
 
 # GPU tensors
 - 모든 tensor 들은 cpu 버전, gpu 버전이 있다. 
 - `torch.FloatTensor` 대신 `torch.cuda.FloatTensor` 메서드로 gpu용 tensor 를 생성할 수 있다. 
 - 이미 생성된 tensor  를 바꾸려면 `to(device)`를 사용한다. 
 
----
+
 # Tensors and gradients
 
 모든 tensor 들은 gradient 와 관련된 다음 attributes 를 가지고 있다. 
@@ -57,7 +57,7 @@ tensor(1)
 - `requires_grad` : gradient 가 계산되어야 한다는 의미. 
 	leaf tensor 의 property이며 default 는 `False`이므로 텐서 생성할 때 그라디언트 계산을 원한다면 해당 플래그를 넣어주어야 한다.
     
----
+
 ### example
 ```python
 >>> v1 = torch.tensor([1.0, 1.0], requires_grad = True)
@@ -71,7 +71,7 @@ tensor(12., grad_fn=<SumBackward0>)
 - v_sum 과 v_res 는 leaf_node 가 아니다. 
 - v2 는 `requires_grad` 가 `False` 이며 나머지는 모두 `True`이다. 
 
----
+
 ### example(continue)
 ```python
 >>> v1.is_leaf, v2.is_leaf
@@ -88,7 +88,7 @@ True
 True
 ```
 
----
+
 ### example(continue)
 ```python
 >>> v_res.backward()
@@ -102,10 +102,10 @@ tensor([2., 2.])
 ```
 v2 는 `requires_grad` 가 `False`였기 때문에 grad값이 없다. 
 
----
+
 # Neural Network
 
----
+
 # NN building blocks 
 
 torch.nn 패키지의 인스턴스들은 그 자체로 함수로 사용될 수 있다(callable).
@@ -121,7 +121,7 @@ tensor([-0.4071,  1.1070, -0.4442, -1.5530,  0.0566], grad_fn=<AddBackward0>)
 
 - (nn 의 weight 은 적절히 초기화 되어있음)
 
----
+
 # nn.Module 의 유용한 메소드
 
 - `parameters()`
@@ -130,7 +130,7 @@ tensor([-0.4071,  1.1070, -0.4442, -1.5530,  0.0566], grad_fn=<AddBackward0>)
 - `state_dict()`
 - `load_state_dict()`
 
----
+
 # Sequential class
 ```python
 >>> s = nn.Sequential(nn.Linear(2,5), nn.ReLU(), 
@@ -148,7 +148,7 @@ tensor([[0.2077, 0.4451, 0.3472]], grad_fn=<SoftmaxBackward>)
 ```
 (sequential nn 의 마지막에 ReLU 가 아닌 softmax 함수를 적용하는 이유는 정규화를 위해서인듯)
 
----
+
 
 # Custom layers
 
@@ -156,7 +156,7 @@ custom module을 만드려면
 1. submodules 을 등록하고,
 2. `forward()`메서드를 override해야 한다. 
 
----
+
 ### example 
 ```python
 class OurModule(nn.Module):
@@ -174,7 +174,7 @@ class OurModule(nn.Module):
 ```
 - pipe field 에 할당하는 것이 submodule 등록이다.
 
----
+
 ### example(cont.)
 ```python
 	def forward(self, x):
@@ -192,7 +192,7 @@ if __name__ == "__main__":
 ```
 - `forward()`를 직접 호출하면 안됨. callable로 (instance를 함수로 생각하고 인자를 주어서) 호출하여야 한다. 
 
----
+
 ### example(result)
 ```python
   input = module(input)
@@ -210,10 +210,10 @@ OurModule(
 tensor([0.6613, 0.1694, 0.1694], grad_fn=<SoftmaxBackward>)
 ```
 
----
+
 # 마지막 : Loss function 과 Optimizer
 
----
+
 # Loss functions
 
 - `nn.Module` 의 subclass 이다. 
@@ -223,7 +223,7 @@ tensor([0.6613, 0.1694, 0.1694], grad_fn=<SoftmaxBackward>)
     -`nn.BCELoss`, `nn.BCEWithLogits` : binary cross entropy loss. binary classification 문제에 자주 사용된다. 
     -`nn.CrossEntropyLoss`,`nn.NLLLoss` : maximum likelihood (최대우도)를 이용. multi-class 분류에서 자주 사용된다. 
 
----
+
 # Optimizers
 
 - `torch.optim` 에서 제공한다. 
@@ -236,7 +236,7 @@ tensor([0.6613, 0.1694, 0.1694], grad_fn=<SoftmaxBackward>)
  >배치(batch) 크기가 1인 경사 하강법 알고리즘이다. 
  >기울기를 계산 하기 위해 사용하는 예제를 1개로 잡는 것이다.
 
---- 
+ 
 ### example : 전체 과정! 잘 보자
 ```python
 # 각각의 batch sample과 lable(desired data)에 대하여 실행합니다.
@@ -257,13 +257,13 @@ for batch_samples, batch_labels in iterate_batches(data, batch_size =32):
 	optimizer.zero_grad()
 ```
 
----
+
 ### example(cont.)
 - `backward()`를 수행할 때 마다 `require_grad=True`인 모든 tensor 의 `grad`를 계산하여 축적한다. 
 - `optimizer.step()`는 구해진 gradients 를  이용해 parameters 를 갱신한다. 
 - `optimizer.zero_grad()`는 `grad` field 를 0으로 초기화한다.
 
----
+
 
 # Monitoring with TensorBoard
 - 딥러닝은 세팅해줘야하는 parameter 들이 무척 많으며 이를 조정하는 과정이 매우 고통스럽기 때문에 모니터링 스킬이 필요하다고 한다...
@@ -273,5 +273,5 @@ for batch_samples, batch_labels in iterate_batches(data, batch_size =32):
 3. gradients 와 weight 의 통계
 4. learning rates 와 다른 hyper parameters
 - TensorBoard 사용하자.
----
+
 # 끝
