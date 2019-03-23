@@ -9,6 +9,10 @@ Maxim Lapan 의 "Deep Reinforcement Learning Hands-On" 을 공부하여 작성�
 - Chapter 5: Tabular Learning and the Bellman Equation
 - Chapter 6: Deep Q-Networks
 - Chapter 7: DQN Extensions
+- Chapter 9: Policy Gradients - an alternative
+- Chapter 10: The Actor-Critic Method
+- Chapter 11: 
+- Chapter 14: Continuous Action Space
 
 
 - 중간 점검: OpenAI Gym MountainCar-v0 풀어보기
